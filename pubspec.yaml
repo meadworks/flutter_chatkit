@@ -1,6 +1,7 @@
 name: flutter_chatkit
 description: "A Flutter package that provides a drop-in chat UI widget compatible with OpenAI ChatKit backends"
 version: 0.1.0
+repository: https://github.com/meadworks/flutter_chatkit
 
 environment:
   sdk: ">=3.5.0 <4.0.0"
