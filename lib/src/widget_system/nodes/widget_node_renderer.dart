@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../../theme/chat_kit_theme_data.dart';
+import '../../widgets/primitives/chatkit_icons.dart';
+import '../../widgets/primitives/chatkit_primitives.dart';
 import '../widget_models/widget_node.dart';
 import '../widget_models/widget_action.dart';
 import '../widget_renderer.dart';
@@ -54,7 +56,7 @@ class WidgetNodeRenderer extends StatelessWidget {
         ),
 
       IconNode(:final size) => Icon(
-          Icons.circle,
+          ChatKitIcons.circle,
           size: size ?? 24,
           color: theme.colorScheme.onSurface,
         ),
@@ -76,7 +78,7 @@ class WidgetNodeRenderer extends StatelessWidget {
           ),
         ),
 
-      DividerNode() => Divider(color: theme.colorScheme.outline),
+      DividerNode() => ChatKitDivider(color: theme.colorScheme.outline),
 
       SpacerNode(:final size) => SizedBox(height: size),
 
@@ -100,7 +102,7 @@ class WidgetNodeRenderer extends StatelessWidget {
           )).toList(),
         ),
 
-      LinkNode(:final text) => InkWell(
+      LinkNode(:final text) => ChatKitTappable(
           onTap: () {},
           child: Text(
             text,
@@ -134,20 +136,26 @@ class WidgetNodeRenderer extends StatelessWidget {
   Widget _buildButton(BuildContext context, ChatKitThemeData theme,
       String label, Map<String, dynamic>? action, String? variant, bool disabled) {
     final isPrimary = variant == 'primary' || variant == null;
-    return ElevatedButton(
-      onPressed: disabled ? null : () {
+    return ChatKitTappable(
+      onTap: disabled ? null : () {
         if (action != null && onAction != null) {
           onAction!(WidgetAction.fromJson(action));
         }
       },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: isPrimary ? theme.colorScheme.primary : theme.colorScheme.surface,
-        foregroundColor: isPrimary ? theme.colorScheme.onPrimary : theme.colorScheme.onSurface,
-        shape: RoundedRectangleBorder(
-          borderRadius: theme.radius.mediumBorderRadius,
+      borderRadius: theme.radius.mediumBorderRadius,
+      color: isPrimary ? theme.colorScheme.primary : theme.colorScheme.surface,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: theme.density.paddingExtraLarge,
+          vertical: theme.density.paddingMedium,
+        ),
+        child: Text(
+          label,
+          style: theme.typography.labelLarge.copyWith(
+            color: isPrimary ? theme.colorScheme.onPrimary : theme.colorScheme.onSurface,
+          ),
         ),
       ),
-      child: Text(label),
     );
   }
 
@@ -164,15 +172,13 @@ class WidgetNodeRenderer extends StatelessWidget {
               color: theme.colorScheme.onSurface,
             )),
           ),
-        TextField(
+        ChatKitTextField(
           controller: TextEditingController(text: value),
-          decoration: InputDecoration(
-            hintText: placeholder,
-            border: OutlineInputBorder(borderRadius: theme.radius.mediumBorderRadius),
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: theme.density.paddingLarge,
-              vertical: theme.density.paddingMedium,
-            ),
+          hintText: placeholder,
+          borderRadius: theme.radius.mediumBorderRadius,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: theme.density.paddingLarge,
+            vertical: theme.density.paddingMedium,
           ),
           style: theme.typography.bodyMedium,
         ),
@@ -193,14 +199,12 @@ class WidgetNodeRenderer extends StatelessWidget {
               color: theme.colorScheme.onSurface,
             )),
           ),
-        TextField(
+        ChatKitTextField(
           controller: TextEditingController(text: value),
           maxLines: rows ?? 4,
-          decoration: InputDecoration(
-            hintText: placeholder,
-            border: OutlineInputBorder(borderRadius: theme.radius.mediumBorderRadius),
-            contentPadding: EdgeInsets.all(theme.density.paddingLarge),
-          ),
+          hintText: placeholder,
+          borderRadius: theme.radius.mediumBorderRadius,
+          contentPadding: EdgeInsets.all(theme.density.paddingLarge),
           style: theme.typography.bodyMedium,
         ),
       ],
@@ -220,20 +224,18 @@ class WidgetNodeRenderer extends StatelessWidget {
               color: theme.colorScheme.onSurface,
             )),
           ),
-        DropdownButtonFormField<String>(
-          initialValue: value,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: theme.radius.mediumBorderRadius),
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: theme.density.paddingLarge,
-              vertical: theme.density.paddingMedium,
-            ),
-          ),
-          items: options.map((o) => DropdownMenuItem(
+        ChatKitDropdown<String>(
+          value: value,
+          items: options.map((o) => ChatKitDropdownItem(
             value: o.value,
-            child: Text(o.label, style: theme.typography.bodyMedium),
+            label: o.label,
           )).toList(),
           onChanged: (_) {},
+          borderRadius: theme.radius.mediumBorderRadius,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: theme.density.paddingLarge,
+            vertical: theme.density.paddingMedium,
+          ),
         ),
       ],
     );
@@ -243,11 +245,13 @@ class WidgetNodeRenderer extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Checkbox(value: checked, onChanged: (_) {}),
-        if (label != null)
+        ChatKitCheckbox(value: checked, onChanged: (_) {}),
+        if (label != null) ...[
+          SizedBox(width: theme.density.spacingSmall),
           Text(label, style: theme.typography.bodyMedium.copyWith(
             color: theme.colorScheme.onSurface,
           )),
+        ],
       ],
     );
   }

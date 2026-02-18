@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// A small icon button for thread item actions
 class FeedbackButton extends StatelessWidget {
@@ -21,14 +22,11 @@ class FeedbackButton extends StatelessWidget {
     return SizedBox(
       width: 28,
       height: 28,
-      child: IconButton(
+      child: ChatKitIconButton(
         onPressed: onPressed,
-        icon: Icon(icon, size: 16),
-        color: theme.colorScheme.onSurfaceVariant,
+        icon: Icon(icon, size: 16, color: theme.colorScheme.onSurfaceVariant),
         tooltip: tooltip,
-        padding: EdgeInsets.zero,
-        constraints: const BoxConstraints(),
-        splashRadius: 14,
+        size: 28,
       ),
     );
   }

@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../chat_kit_inherited.dart';
+import '../primitives/chatkit_icons.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// Send / Cancel button in the composer
 class SendButton extends StatelessWidget {
@@ -12,8 +14,9 @@ class SendButton extends StatelessWidget {
     final theme = ChatKitTheme.of(context);
 
     if (controller.isStreamActive) {
-      return IconButton(
+      return ChatKitIconButton(
         onPressed: controller.cancelStream,
+        tooltip: 'Stop generating',
         icon: Container(
           width: 36,
           height: 36,
@@ -22,21 +25,21 @@ class SendButton extends StatelessWidget {
             shape: BoxShape.circle,
           ),
           child: Icon(
-            Icons.stop,
+            ChatKitIcons.stop,
             color: theme.colorScheme.onError,
             size: 20,
           ),
         ),
-        tooltip: 'Stop generating',
       );
     }
 
     final canSend = controller.canSend && !controller.isSending;
 
-    return IconButton(
+    return ChatKitIconButton(
       onPressed: canSend ? () {
         controller.send();
       } : null,
+      tooltip: 'Send message',
       icon: Container(
         width: 36,
         height: 36,
@@ -45,12 +48,11 @@ class SendButton extends StatelessWidget {
           shape: BoxShape.circle,
         ),
         child: Icon(
-          Icons.arrow_upward,
+          ChatKitIcons.arrowUpward,
           color: canSend ? theme.colorScheme.onPrimary : theme.colorScheme.onSurfaceVariant,
           size: 20,
         ),
       ),
-      tooltip: 'Send message',
     );
   }
 }

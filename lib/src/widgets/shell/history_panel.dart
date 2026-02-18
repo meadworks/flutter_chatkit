@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../chat_kit_inherited.dart';
+import '../primitives/chatkit_icons.dart';
+import '../primitives/chatkit_primitives.dart';
 import 'thread_list_tile.dart';
 
 /// The history panel showing thread list
@@ -38,14 +40,15 @@ class HistoryPanel extends StatelessWidget {
                     ),
                   ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.close, size: 20, color: theme.colorScheme.onSurfaceVariant),
+                ChatKitIconButton(
+                  icon: Icon(ChatKitIcons.close, size: 20, color: theme.colorScheme.onSurfaceVariant),
                   onPressed: onClose,
+                  size: 32,
                 ),
               ],
             ),
           ),
-          Divider(height: 1, color: theme.colorScheme.outline),
+          ChatKitDivider(height: 1, color: theme.colorScheme.outline),
           // Thread list
           Expanded(
             child: threads.isEmpty

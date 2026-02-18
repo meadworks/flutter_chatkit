@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../models/thread_item.dart';
 import '../../theme/chat_kit_theme.dart';
 import 'message_bubble.dart';

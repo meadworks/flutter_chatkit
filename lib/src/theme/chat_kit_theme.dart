@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'chat_kit_theme_data.dart';
 
 /// Provides ChatKit theme data to descendant widgets
@@ -11,14 +11,14 @@ class ChatKitTheme extends InheritedWidget {
 
   final ChatKitThemeData data;
 
-  /// Get the nearest ChatKitThemeData, or create one from the current Flutter theme
+  /// Get the nearest ChatKitThemeData, or fall back to default light theme
   static ChatKitThemeData of(BuildContext context) {
     final widget = context.dependOnInheritedWidgetOfExactType<ChatKitTheme>();
     if (widget != null) {
       return widget.data;
     }
-    // Fallback: derive from Flutter theme
-    return ChatKitThemeData.fromTheme(Theme.of(context));
+    // Fallback: default light theme (no Material dependency)
+    return const ChatKitThemeData();
   }
 
   /// Get the nearest ChatKitThemeData, or null

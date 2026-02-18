@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart' show ThemeData;
 import 'color_scheme_data.dart';
 import 'typography_data.dart';
 import 'radius_data.dart';

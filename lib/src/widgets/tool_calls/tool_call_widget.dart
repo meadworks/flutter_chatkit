@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../models/thread_item.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../../theme/chat_kit_theme_data.dart';
+import '../primitives/chatkit_icons.dart';
 
 /// Displays a client tool call
 class ToolCallWidget extends StatelessWidget {
@@ -10,9 +11,9 @@ class ToolCallWidget extends StatelessWidget {
   final ClientToolCallItem item;
 
   IconData get _statusIcon => switch (item.status) {
-    ToolCallStatus.pending => Icons.hourglass_empty,
-    ToolCallStatus.completed => Icons.check_circle,
-    ToolCallStatus.failed => Icons.error,
+    ToolCallStatus.pending => ChatKitIcons.hourglassEmpty,
+    ToolCallStatus.completed => ChatKitIcons.checkCircle,
+    ToolCallStatus.failed => ChatKitIcons.error,
   };
 
   Color _statusColor(ChatKitThemeData theme) => switch (item.status) {

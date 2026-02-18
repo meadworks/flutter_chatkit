@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
+import '../primitives/chatkit_icons.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// Displays an error message in the chat
 class ErrorMessageWidget extends StatelessWidget {
@@ -28,7 +30,7 @@ class ErrorMessageWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(Icons.error_outline, color: theme.colorScheme.error, size: 20),
+          Icon(ChatKitIcons.errorOutline, color: theme.colorScheme.error, size: 20),
           SizedBox(width: theme.density.spacingMedium),
           Expanded(
             child: Text(
@@ -39,12 +41,19 @@ class ErrorMessageWidget extends StatelessWidget {
             ),
           ),
           if (allowRetry && onRetry != null)
-            TextButton(
-              onPressed: onRetry,
-              child: Text(
-                'Retry',
-                style: theme.typography.labelLarge.copyWith(
-                  color: theme.colorScheme.error,
+            ChatKitTappable(
+              onTap: onRetry,
+              borderRadius: theme.radius.smallBorderRadius,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: theme.density.paddingMedium,
+                  vertical: theme.density.paddingSmall,
+                ),
+                child: Text(
+                  'Retry',
+                  style: theme.typography.labelLarge.copyWith(
+                    color: theme.colorScheme.error,
+                  ),
                 ),
               ),
             ),

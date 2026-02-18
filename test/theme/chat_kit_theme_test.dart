@@ -227,8 +227,9 @@ void main() {
 
       late ChatKitThemeData retrieved;
       await tester.pumpWidget(
-        MaterialApp(
-          home: ChatKitTheme(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: ChatKitTheme(
             data: themeData,
             child: Builder(
               builder: (context) {
@@ -244,31 +245,13 @@ void main() {
       expect(retrieved.colorScheme, same(ChatKitColorScheme.dark));
     });
 
-    testWidgets('falls back to Flutter theme when no ChatKitTheme ancestor',
+    testWidgets('falls back to default light theme when no ChatKitTheme ancestor',
         (tester) async {
       late ChatKitThemeData retrieved;
       await tester.pumpWidget(
-        MaterialApp(
-          theme: ThemeData.dark(),
-          home: Builder(
-            builder: (context) {
-              retrieved = ChatKitTheme.of(context);
-              return const SizedBox();
-            },
-          ),
-        ),
-      );
-
-      expect(retrieved.brightness, Brightness.dark);
-    });
-
-    testWidgets('falls back to light theme from Flutter theme',
-        (tester) async {
-      late ChatKitThemeData retrieved;
-      await tester.pumpWidget(
-        MaterialApp(
-          theme: ThemeData.light(),
-          home: Builder(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: Builder(
             builder: (context) {
               retrieved = ChatKitTheme.of(context);
               return const SizedBox();
@@ -278,14 +261,16 @@ void main() {
       );
 
       expect(retrieved.brightness, Brightness.light);
+      expect(retrieved.colorScheme, same(ChatKitColorScheme.light));
     });
 
     testWidgets('maybeOf returns null when no ChatKitTheme ancestor',
         (tester) async {
       ChatKitThemeData? retrieved;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Builder(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: Builder(
             builder: (context) {
               retrieved = ChatKitTheme.maybeOf(context);
               return const SizedBox();
@@ -303,8 +288,9 @@ void main() {
       ChatKitThemeData? retrieved;
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: ChatKitTheme(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: ChatKitTheme(
             data: themeData,
             child: Builder(
               builder: (context) {
@@ -323,8 +309,9 @@ void main() {
     testWidgets('nearest ChatKitTheme wins over ancestor', (tester) async {
       late ChatKitThemeData retrieved;
       await tester.pumpWidget(
-        MaterialApp(
-          home: ChatKitTheme(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: ChatKitTheme(
             data: ChatKitThemeData.light(),
             child: ChatKitTheme(
               data: ChatKitThemeData.dark(),
@@ -352,8 +339,9 @@ void main() {
       var currentTheme = lightTheme;
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: StatefulBuilder(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: StatefulBuilder(
             builder: (context, setter) {
               setState = setter;
               return ChatKitTheme(

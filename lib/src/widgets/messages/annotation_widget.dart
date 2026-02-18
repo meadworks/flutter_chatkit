@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../models/annotation.dart';
 import '../../theme/chat_kit_theme.dart';
+import '../primitives/chatkit_icons.dart';
 
 /// Displays a citation/source annotation
 class AnnotationWidget extends StatelessWidget {
@@ -34,7 +35,7 @@ class AnnotationWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
-            Icons.link,
+            ChatKitIcons.link,
             size: 14,
             color: theme.colorScheme.primary,
           ),

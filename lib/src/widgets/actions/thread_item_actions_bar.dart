@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import '../../models/thread_item.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../chat_kit_inherited.dart';
+import '../primitives/chatkit_icons.dart';
 import 'feedback_button.dart';
 
 /// Action bar for thread items (feedback, copy, retry)
@@ -27,13 +28,13 @@ class ThreadItemActionsBar extends StatelessWidget {
       children: [
         if (actions.showFeedback) ...[
           FeedbackButton(
-            icon: Icons.thumb_up_outlined,
+            icon: ChatKitIcons.thumbUpOutlined,
             tooltip: 'Good response',
             onPressed: () => controller.submitFeedback([item.id], 'positive'),
           ),
           SizedBox(width: theme.density.spacingSmall),
           FeedbackButton(
-            icon: Icons.thumb_down_outlined,
+            icon: ChatKitIcons.thumbDownOutlined,
             tooltip: 'Bad response',
             onPressed: () => controller.submitFeedback([item.id], 'negative'),
           ),
@@ -41,7 +42,7 @@ class ThreadItemActionsBar extends StatelessWidget {
         if (actions.showCopy && copyText != null) ...[
           SizedBox(width: theme.density.spacingSmall),
           FeedbackButton(
-            icon: Icons.copy,
+            icon: ChatKitIcons.copy,
             tooltip: 'Copy',
             onPressed: () {
               Clipboard.setData(ClipboardData(text: copyText!));
@@ -51,7 +52,7 @@ class ThreadItemActionsBar extends StatelessWidget {
         if (actions.showRetry) ...[
           SizedBox(width: theme.density.spacingSmall),
           FeedbackButton(
-            icon: Icons.refresh,
+            icon: ChatKitIcons.refresh,
             tooltip: 'Retry',
             onPressed: () => controller.retryFromItem(item.id),
           ),

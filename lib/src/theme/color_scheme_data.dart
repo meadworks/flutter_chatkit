@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 /// Color scheme for ChatKit, supporting light and dark modes
 class ChatKitColorScheme {

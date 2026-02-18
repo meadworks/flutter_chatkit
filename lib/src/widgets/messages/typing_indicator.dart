@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../chat_kit_inherited.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// Animated typing indicator shown during streaming
 class TypingIndicator extends StatefulWidget {
@@ -43,13 +44,10 @@ class _TypingIndicatorState extends State<TypingIndicator>
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(
-                width: 16,
-                height: 16,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: theme.colorScheme.primary,
-                ),
+              ChatKitSpinner(
+                size: 16,
+                strokeWidth: 2,
+                color: theme.colorScheme.primary,
               ),
               SizedBox(width: theme.density.spacingMedium),
               Text(

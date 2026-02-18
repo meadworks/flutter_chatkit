@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// Displays a progress indicator for streaming operations
 class ProgressIndicatorWidget extends StatelessWidget {
@@ -24,13 +25,10 @@ class ProgressIndicatorWidget extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-            width: 16,
-            height: 16,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              color: theme.colorScheme.primary,
-            ),
+          ChatKitSpinner(
+            size: 16,
+            strokeWidth: 2,
+            color: theme.colorScheme.primary,
           ),
           if (text != null) ...[
             SizedBox(width: theme.density.spacingMedium),

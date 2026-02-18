@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../state/chat_kit_controller.dart';
 
 /// Provides the ChatKitController to descendant widgets

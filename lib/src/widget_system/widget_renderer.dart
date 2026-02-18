@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../theme/chat_kit_theme.dart';
+import '../widgets/primitives/chatkit_primitives.dart';
 import 'widget_models/widget_root.dart';
 import 'widget_models/widget_action.dart';
 import 'nodes/widget_node_renderer.dart';
@@ -23,11 +24,18 @@ class WidgetRenderer extends StatelessWidget {
     final theme = ChatKitTheme.of(context);
 
     return switch (root) {
-      CardRoot(:final title, :final children, :final footer) => Card(
-          color: theme.colorScheme.surface,
-          shape: RoundedRectangleBorder(
+      CardRoot(:final title, :final children, :final footer) => Container(
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface,
             borderRadius: theme.radius.largeBorderRadius,
-            side: BorderSide(color: theme.colorScheme.outline, width: 0.5),
+            border: Border.all(color: theme.colorScheme.outline, width: 0.5),
+            boxShadow: [
+              BoxShadow(
+                color: theme.colorScheme.shadow,
+                blurRadius: 4,
+                offset: const Offset(0, 1),
+              ),
+            ],
           ),
           child: Padding(
             padding: EdgeInsets.all(theme.density.paddingExtraLarge),
@@ -50,7 +58,7 @@ class WidgetRenderer extends StatelessWidget {
                 )),
                 if (footer != null) ...[
                   SizedBox(height: theme.density.spacingLarge),
-                  Divider(color: theme.colorScheme.outline),
+                  ChatKitDivider(color: theme.colorScheme.outline),
                   SizedBox(height: theme.density.spacingMedium),
                   ...footer.map((node) => WidgetNodeRenderer(
                     node: node,

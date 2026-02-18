@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../state/chat_kit_controller.dart';
 import '../theme/chat_kit_theme.dart';
 import '../theme/chat_kit_theme_data.dart';

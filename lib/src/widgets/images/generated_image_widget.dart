@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../models/thread_item.dart';
 import '../../theme/chat_kit_theme.dart';
+import '../primitives/chatkit_icons.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// Displays a generated image
 class GeneratedImageWidget extends StatelessWidget {
@@ -25,7 +27,7 @@ class GeneratedImageWidget extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircularProgressIndicator(
+              ChatKitSpinner(
                 color: theme.colorScheme.primary,
               ),
               SizedBox(height: theme.density.spacingMedium),
@@ -54,7 +56,7 @@ class GeneratedImageWidget extends StatelessWidget {
             height: 300,
             color: theme.colorScheme.surfaceVariant,
             child: Center(
-              child: CircularProgressIndicator(
+              child: ChatKitSpinner(
                 value: loadingProgress.expectedTotalBytes != null
                     ? loadingProgress.cumulativeBytesLoaded /
                         loadingProgress.expectedTotalBytes!
@@ -74,7 +76,7 @@ class GeneratedImageWidget extends StatelessWidget {
             ),
             child: Center(
               child: Icon(
-                Icons.broken_image,
+                ChatKitIcons.brokenImage,
                 color: theme.colorScheme.onSurfaceVariant,
               ),
             ),

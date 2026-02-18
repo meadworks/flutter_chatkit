@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../chat_kit_inherited.dart';
+import '../primitives/chatkit_icons.dart';
 
 /// Displays pending attachments in the composer
 class AttachmentBar extends StatelessWidget {
@@ -24,18 +25,30 @@ class AttachmentBar extends StatelessWidget {
         separatorBuilder: (_, __) => SizedBox(width: theme.density.spacingMedium),
         itemBuilder: (context, index) {
           final attachment = attachments[index];
-          return Chip(
-            label: Text(
-              attachment.name,
-              style: theme.typography.labelMedium.copyWith(
-                color: theme.colorScheme.onSurface,
-              ),
+          return Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: theme.density.paddingMedium,
+              vertical: theme.density.paddingSmall,
             ),
-            deleteIcon: Icon(Icons.close, size: 16, color: theme.colorScheme.onSurfaceVariant),
-            onDeleted: () => controller.messageController.removeAttachment(attachment.id),
-            backgroundColor: theme.colorScheme.surfaceVariant,
-            shape: RoundedRectangleBorder(
+            decoration: BoxDecoration(
+              color: theme.colorScheme.surfaceVariant,
               borderRadius: theme.radius.mediumBorderRadius,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  attachment.name,
+                  style: theme.typography.labelMedium.copyWith(
+                    color: theme.colorScheme.onSurface,
+                  ),
+                ),
+                SizedBox(width: theme.density.spacingSmall),
+                GestureDetector(
+                  onTap: () => controller.messageController.removeAttachment(attachment.id),
+                  child: Icon(ChatKitIcons.close, size: 16, color: theme.colorScheme.onSurfaceVariant),
+                ),
+              ],
             ),
           );
         },

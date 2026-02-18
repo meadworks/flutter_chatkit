@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../models/thread_item.dart';
 import '../../theme/chat_kit_theme.dart';
+import '../primitives/chatkit_icons.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// Displays a thought/reasoning task with expandable content
 class ReasoningWidget extends StatefulWidget {
@@ -22,13 +24,13 @@ class _ReasoningWidgetState extends State<ReasoningWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InkWell(
+        ChatKitTappable(
           onTap: widget.task.content != null
               ? () => setState(() => _expanded = !_expanded)
               : null,
           child: Row(
             children: [
-              Icon(Icons.psychology, size: 16, color: theme.colorScheme.onSurfaceVariant),
+              Icon(ChatKitIcons.psychology, size: 16, color: theme.colorScheme.onSurfaceVariant),
               SizedBox(width: theme.density.spacingSmall),
               Expanded(
                 child: Text(
@@ -41,7 +43,7 @@ class _ReasoningWidgetState extends State<ReasoningWidget> {
               ),
               if (widget.task.content != null)
                 Icon(
-                  _expanded ? Icons.expand_less : Icons.expand_more,
+                  _expanded ? ChatKitIcons.expandLess : ChatKitIcons.expandMore,
                   size: 16,
                   color: theme.colorScheme.onSurfaceVariant,
                 ),

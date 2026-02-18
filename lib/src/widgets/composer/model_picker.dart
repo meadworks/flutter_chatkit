@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../config/model_option.dart';
 import '../../models/inference_options.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../chat_kit_inherited.dart';
+import '../primitives/chatkit_icons.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// A dropdown to select a model for the next message
 class ModelPicker extends StatelessWidget {
@@ -16,23 +18,28 @@ class ModelPicker extends StatelessWidget {
 
     if (models.isEmpty) return const SizedBox.shrink();
 
-    return PopupMenuButton<ModelItem>(
-      icon: Icon(Icons.smart_toy_outlined, color: theme.colorScheme.onSurfaceVariant, size: 20),
+    return ChatKitPopupMenu<ModelItem>(
+      icon: Icon(ChatKitIcons.smartToyOutlined, color: theme.colorScheme.onSurfaceVariant, size: 20),
       tooltip: 'Select model',
       onSelected: (model) {
         controller.messageController.setInferenceOptions(
           InferenceOptions(model: model.id),
         );
       },
-      itemBuilder: (context) => models.map((model) {
-        return PopupMenuItem<ModelItem>(
+      items: models.map((model) {
+        return ChatKitPopupMenuItem<ModelItem>(
           value: model,
-          child: ListTile(
-            dense: true,
-            title: Text(model.label, style: theme.typography.bodyMedium),
-            subtitle: model.description != null
-                ? Text(model.description!, style: theme.typography.bodySmall)
-                : null,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: theme.density.paddingSmall),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(model.label, style: theme.typography.bodyMedium),
+                if (model.description != null)
+                  Text(model.description!, style: theme.typography.bodySmall),
+              ],
+            ),
           ),
         );
       }).toList(),

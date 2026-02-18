@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../models/thread_item.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../chat_kit_inherited.dart';
+import '../primitives/chatkit_icons.dart';
 import 'user_message_widget.dart';
 import 'assistant_message_widget.dart';
 import 'typing_indicator.dart';
@@ -95,10 +96,24 @@ class _MessageListState extends State<MessageList> {
           Positioned(
             bottom: 16,
             right: 16,
-            child: FloatingActionButton.small(
-              onPressed: _scrollToBottom,
-              backgroundColor: theme.colorScheme.surface,
-              child: Icon(Icons.keyboard_arrow_down, color: theme.colorScheme.onSurface),
+            child: GestureDetector(
+              onTap: _scrollToBottom,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surface,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: theme.colorScheme.shadow,
+                      blurRadius: 6,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Icon(ChatKitIcons.keyboardArrowDown, color: theme.colorScheme.onSurface),
+              ),
             ),
           ),
       ],

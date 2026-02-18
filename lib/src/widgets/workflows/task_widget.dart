@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../models/thread_item.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../../theme/chat_kit_theme_data.dart';
+import '../primitives/chatkit_icons.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// Displays a single workflow task
 class TaskWidget extends StatelessWidget {
@@ -10,11 +12,11 @@ class TaskWidget extends StatelessWidget {
   final Task task;
 
   IconData get _icon => switch (task) {
-    CustomTask() => Icons.task_alt,
-    SearchTask() => Icons.search,
-    ThoughtTask() => Icons.psychology,
-    FileTask() => Icons.description,
-    ImageTask() => Icons.image,
+    CustomTask() => ChatKitIcons.taskAlt,
+    SearchTask() => ChatKitIcons.search,
+    ThoughtTask() => ChatKitIcons.psychology,
+    FileTask() => ChatKitIcons.description,
+    ImageTask() => ChatKitIcons.image,
   };
 
   String get _title => switch (task) {
@@ -27,15 +29,12 @@ class TaskWidget extends StatelessWidget {
 
   Widget _statusWidget(ChatKitThemeData theme) {
     return switch (task.statusIndicator) {
-      'loading' => SizedBox(
-          width: 14,
-          height: 14,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            color: theme.colorScheme.primary,
-          ),
+      'loading' => ChatKitSpinner(
+          size: 14,
+          strokeWidth: 2,
+          color: theme.colorScheme.primary,
         ),
-      'complete' => Icon(Icons.check, size: 14, color: theme.colorScheme.primary),
+      'complete' => Icon(ChatKitIcons.check, size: 14, color: theme.colorScheme.primary),
       _ => const SizedBox(width: 14, height: 14),
     };
   }

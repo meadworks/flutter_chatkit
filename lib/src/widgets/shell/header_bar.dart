@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../chat_kit_inherited.dart';
+import '../primitives/chatkit_icons.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// The header bar with title and controls
 class ChatKitHeaderBar extends StatelessWidget {
@@ -31,9 +33,9 @@ class ChatKitHeaderBar extends StatelessWidget {
       child: Row(
         children: [
           if (options.showHistoryButton && onHistoryToggle != null)
-            IconButton(
+            ChatKitIconButton(
               icon: Icon(
-                isHistoryOpen ? Icons.menu_open : Icons.menu,
+                isHistoryOpen ? ChatKitIcons.menuOpen : ChatKitIcons.menu,
                 color: theme.colorScheme.onSurface,
               ),
               onPressed: onHistoryToggle,
@@ -52,8 +54,8 @@ class ChatKitHeaderBar extends StatelessWidget {
             ),
           ] else
             const Spacer(),
-          IconButton(
-            icon: Icon(Icons.add, color: theme.colorScheme.onSurface),
+          ChatKitIconButton(
+            icon: Icon(ChatKitIcons.add, color: theme.colorScheme.onSurface),
             onPressed: controller.startNewThread,
             tooltip: 'New chat',
           ),

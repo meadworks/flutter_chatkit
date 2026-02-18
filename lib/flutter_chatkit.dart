@@ -60,6 +60,8 @@ export 'src/l10n/chat_kit_localizations_delegate.dart';
 // Widgets
 export 'src/widgets/chat_kit.dart';
 export 'src/widgets/chat_kit_inherited.dart';
+export 'src/widgets/primitives/chatkit_icons.dart';
+export 'src/widgets/primitives/chatkit_primitives.dart';
 
 // Widget System
 export 'src/widget_system/widget_renderer.dart';

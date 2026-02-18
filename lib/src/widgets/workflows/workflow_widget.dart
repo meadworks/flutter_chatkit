@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../models/thread_item.dart';
 import '../../theme/chat_kit_theme.dart';
+import '../primitives/chatkit_icons.dart';
+import '../primitives/chatkit_primitives.dart';
 import 'task_widget.dart';
 
 /// Displays a workflow with its tasks
@@ -53,7 +55,7 @@ class _WorkflowWidgetState extends State<WorkflowWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
-          InkWell(
+          ChatKitTappable(
             onTap: () => setState(() => _expanded = !_expanded),
             borderRadius: theme.radius.mediumBorderRadius,
             child: Padding(
@@ -61,7 +63,7 @@ class _WorkflowWidgetState extends State<WorkflowWidget> {
               child: Row(
                 children: [
                   Icon(
-                    _expanded ? Icons.expand_less : Icons.expand_more,
+                    _expanded ? ChatKitIcons.expandLess : ChatKitIcons.expandMore,
                     size: 20,
                     color: theme.colorScheme.onSurfaceVariant,
                   ),
@@ -80,7 +82,7 @@ class _WorkflowWidgetState extends State<WorkflowWidget> {
           ),
           // Tasks
           if (_expanded && workflow.tasks.isNotEmpty) ...[
-            Divider(height: 1, color: theme.colorScheme.outline),
+            ChatKitDivider(height: 1, color: theme.colorScheme.outline),
             Padding(
               padding: EdgeInsets.all(theme.density.paddingLarge),
               child: Column(

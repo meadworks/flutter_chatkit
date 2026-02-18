@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// A chip that displays a suggested prompt
 class PromptChip extends StatelessWidget {
@@ -16,22 +17,19 @@ class PromptChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = ChatKitTheme.of(context);
 
-    return Material(
+    return ChatKitTappable(
+      onTap: onTap,
       color: theme.colorScheme.surfaceVariant,
       borderRadius: theme.radius.fullBorderRadius,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: theme.radius.fullBorderRadius,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: theme.density.paddingExtraLarge,
-            vertical: theme.density.paddingMedium,
-          ),
-          child: Text(
-            label,
-            style: theme.typography.bodyMedium.copyWith(
-              color: theme.colorScheme.onSurface,
-            ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: theme.density.paddingExtraLarge,
+          vertical: theme.density.paddingMedium,
+        ),
+        child: Text(
+          label,
+          style: theme.typography.bodyMedium.copyWith(
+            color: theme.colorScheme.onSurface,
           ),
         ),
       ),
