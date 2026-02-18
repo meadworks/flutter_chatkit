@@ -1,6 +1,6 @@
 name: flutter_chat_kit_ui
 description: "Unofficial Flutter port of the OpenAI ChatKit UI. A drop-in chat widget compatible with OpenAI ChatKit backends."
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/meadworks/flutter_chatkit
 
 environment:
