@@ -6,7 +6,9 @@ import 'thread_item_update.dart';
 sealed class ThreadStreamEvent {
   const ThreadStreamEvent();
 
-  factory ThreadStreamEvent.fromJson(Map<String, dynamic> json) {
+  /// Parses a JSON map into a [ThreadStreamEvent], or returns `null`
+  /// for unrecognized event types so the stream can skip them gracefully.
+  static ThreadStreamEvent? tryFromJson(Map<String, dynamic> json) {
     return switch (json['type']) {
       'thread.created' => ThreadCreatedEvent.fromJson(json),
       'thread.updated' => ThreadUpdatedEvent.fromJson(json),
@@ -20,8 +22,13 @@ sealed class ThreadStreamEvent {
       'client.effect' || 'client_effect' => ClientEffectEvent.fromJson(json),
       'error' => ErrorEvent.fromJson(json),
       'notice' => NoticeEvent.fromJson(json),
-      _ => throw ArgumentError('Unknown event type: ${json['type']}'),
+      _ => null,
     };
+  }
+
+  factory ThreadStreamEvent.fromJson(Map<String, dynamic> json) {
+    return tryFromJson(json) ??
+        (throw ArgumentError('Unknown event type: ${json['type']}'));
   }
 }
 

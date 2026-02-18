@@ -1,3 +1,8 @@
+## 0.1.1
+
+- Replace discontinued `flutter_markdown` with `flutter_markdown_plus`
+- Gracefully skip unknown SSE event types instead of throwing errors
+
 ## 0.1.0
 
 - Initial release

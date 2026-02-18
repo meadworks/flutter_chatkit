@@ -38,9 +38,10 @@ class CustomClient implements ChatKitClient {
       body: jsonEncode(body),
     );
 
-    final eventStream = connection.eventStream.map(
-      (json) => ThreadStreamEvent.fromJson(json),
-    );
+    final eventStream = connection.eventStream
+        .map((json) => ThreadStreamEvent.tryFromJson(json))
+        .where((event) => event != null)
+        .cast<ThreadStreamEvent>();
 
     return StreamResult(
       events: eventStream,

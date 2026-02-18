@@ -445,7 +445,7 @@ void main() {
       expect(notice.title, isNull);
     });
 
-    test('throws on unknown event type', () {
+    test('throws on unknown event type with fromJson', () {
       final json = {
         'type': 'unknown.event',
         'data': {},
@@ -455,6 +455,24 @@ void main() {
         () => ThreadStreamEvent.fromJson(json),
         throwsA(isA<ArgumentError>()),
       );
+    });
+
+    test('returns null on unknown event type with tryFromJson', () {
+      final json = {
+        'type': 'unknown.event',
+        'data': {},
+      };
+
+      expect(ThreadStreamEvent.tryFromJson(json), isNull);
+    });
+
+    test('returns null for raw text events with tryFromJson', () {
+      final json = {
+        'type': 'text',
+        'text': 'Some error message',
+      };
+
+      expect(ThreadStreamEvent.tryFromJson(json), isNull);
     });
 
     test('throws on unknown update type', () {
