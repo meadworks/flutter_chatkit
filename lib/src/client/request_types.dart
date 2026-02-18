@@ -13,8 +13,10 @@ class ThreadCreateRequest {
   final Map<String, dynamic> metadata;
 
   Map<String, dynamic> toJson() => {
-    'action': 'threads.create',
-    'input': input.toJson(),
+    'type': 'threads.create',
+    'params': {
+      'input': input.toJson(),
+    },
     if (metadata.isNotEmpty) 'metadata': metadata,
   };
 }
@@ -29,9 +31,11 @@ class ThreadAddMessageRequest {
   final UserMessageInput input;
 
   Map<String, dynamic> toJson() => {
-    'action': 'threads.addUserMessage',
-    'thread_id': threadId,
-    'input': input.toJson(),
+    'type': 'threads.add_user_message',
+    'params': {
+      'thread_id': threadId,
+      'input': input.toJson(),
+    },
   };
 }
 
@@ -45,9 +49,11 @@ class ThreadAddToolOutputRequest {
   final Map<String, dynamic> result;
 
   Map<String, dynamic> toJson() => {
-    'action': 'threads.addClientToolOutput',
-    'thread_id': threadId,
-    'result': result,
+    'type': 'threads.add_client_tool_output',
+    'params': {
+      'thread_id': threadId,
+      'result': result,
+    },
   };
 }
 
@@ -61,9 +67,11 @@ class ThreadRetryRequest {
   final String itemId;
 
   Map<String, dynamic> toJson() => {
-    'action': 'threads.retryAfterItem',
-    'thread_id': threadId,
-    'item_id': itemId,
+    'type': 'threads.retry_after_item',
+    'params': {
+      'thread_id': threadId,
+      'item_id': itemId,
+    },
   };
 }
 
@@ -79,10 +87,12 @@ class ThreadCustomActionRequest {
   final Map<String, dynamic> action;
 
   Map<String, dynamic> toJson() => {
-    'action': 'threads.customAction',
-    'thread_id': threadId,
-    'item_id': itemId,
-    'action_data': action,
+    'type': 'threads.custom_action',
+    'params': {
+      'thread_id': threadId,
+      'item_id': itemId,
+      'action': action,
+    },
   };
 }
 

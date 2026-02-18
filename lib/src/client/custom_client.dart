@@ -29,11 +29,11 @@ class CustomClient implements ChatKitClient {
     ...headers,
   };
 
-  Uri _uri(String path) => Uri.parse('$baseUrl$path');
+  Uri get _baseUri => Uri.parse(baseUrl);
 
   Future<StreamResult> _streamRequest(Map<String, dynamic> body) async {
     final connection = await _sseClient.connect(
-      uri: _uri('/stream'),
+      uri: _baseUri,
       headers: _headers,
       body: jsonEncode(body),
     );
@@ -48,27 +48,12 @@ class CustomClient implements ChatKitClient {
     );
   }
 
-  Future<Map<String, dynamic>> _jsonRequest(
-    String method,
-    String path, {
-    Map<String, dynamic>? body,
-    Map<String, String>? queryParams,
-  }) async {
-    final uri = _uri(path).replace(queryParameters: queryParams);
-
-    late http.Response response;
-    switch (method) {
-      case 'GET':
-        response = await _httpClient.get(uri, headers: _headers);
-      case 'POST':
-        response = await _httpClient.post(uri, headers: _headers, body: body != null ? jsonEncode(body) : null);
-      case 'PUT':
-        response = await _httpClient.put(uri, headers: _headers, body: body != null ? jsonEncode(body) : null);
-      case 'DELETE':
-        response = await _httpClient.delete(uri, headers: _headers);
-      default:
-        throw ArgumentError('Unsupported HTTP method: $method');
-    }
+  Future<Map<String, dynamic>> _jsonRequest(Map<String, dynamic> body) async {
+    final response = await _httpClient.post(
+      _baseUri,
+      headers: _headers,
+      body: jsonEncode(body),
+    );
 
     if (response.statusCode < 200 || response.statusCode >= 300) {
       throw ChatKitApiException(
@@ -103,54 +88,88 @@ class CustomClient implements ChatKitClient {
 
   @override
   Future<Thread> getThread(ThreadGetByIdRequest request) async {
-    final json = await _jsonRequest('GET', '/threads/${request.threadId}');
+    final json = await _jsonRequest({
+      'type': 'threads.get_by_id',
+      'params': {
+        'thread_id': request.threadId,
+      },
+    });
     return Thread.fromJson(json);
   }
 
   @override
   Future<Page<ThreadMetadata>> listThreads(ThreadListRequest request) async {
-    final json = await _jsonRequest('GET', '/threads', queryParams: {
-      'limit': request.limit.toString(),
-      'order': request.order,
-      if (request.after != null) 'after': request.after!,
+    final json = await _jsonRequest({
+      'type': 'threads.list',
+      'params': {
+        'limit': request.limit,
+        'order': request.order,
+        if (request.after != null) 'after': request.after,
+      },
     });
     return Page.fromJson(json, (item) => ThreadMetadata.fromJson(item as Map<String, dynamic>));
   }
 
   @override
   Future<Page<ThreadItem>> listItems(ItemsListRequest request) async {
-    final json = await _jsonRequest('GET', '/threads/${request.threadId}/items', queryParams: {
-      'limit': request.limit.toString(),
-      'order': request.order,
-      if (request.after != null) 'after': request.after!,
+    final json = await _jsonRequest({
+      'type': 'items.list',
+      'params': {
+        'thread_id': request.threadId,
+        'limit': request.limit,
+        'order': request.order,
+        if (request.after != null) 'after': request.after,
+      },
     });
     return Page.fromJson(json, (item) => ThreadItem.fromJson(item as Map<String, dynamic>));
   }
 
   @override
   Future<void> submitFeedback(ItemsFeedbackRequest request) async {
-    await _jsonRequest('POST', '/threads/${request.threadId}/items/feedback', body: request.toJson());
+    await _jsonRequest({
+      'type': 'items.feedback',
+      'params': request.toJson(),
+    });
   }
 
   @override
   Future<Attachment> createAttachment(AttachmentCreateRequest request) async {
-    final json = await _jsonRequest('POST', '/attachments', body: request.toJson());
+    final json = await _jsonRequest({
+      'type': 'attachments.create',
+      'params': request.toJson(),
+    });
     return Attachment.fromJson(json);
   }
 
   @override
   Future<void> deleteAttachment(AttachmentDeleteRequest request) async {
-    await _jsonRequest('DELETE', '/attachments/${request.attachmentId}');
+    await _jsonRequest({
+      'type': 'attachments.delete',
+      'params': {
+        'attachment_id': request.attachmentId,
+      },
+    });
   }
 
   @override
   Future<void> updateThread(ThreadUpdateRequest request) async {
-    await _jsonRequest('PUT', '/threads/${request.threadId}', body: {'title': request.title});
+    await _jsonRequest({
+      'type': 'threads.update',
+      'params': {
+        'thread_id': request.threadId,
+        'title': request.title,
+      },
+    });
   }
 
   @override
   Future<void> deleteThread(ThreadDeleteRequest request) async {
-    await _jsonRequest('DELETE', '/threads/${request.threadId}');
+    await _jsonRequest({
+      'type': 'threads.delete',
+      'params': {
+        'thread_id': request.threadId,
+      },
+    });
   }
 
   @override
