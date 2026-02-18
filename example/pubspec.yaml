@@ -1,4 +1,4 @@
-name: flutter_chatkit_example
+name: flutter_chat_kit_ui_example
 description: Example app for Flutter ChatKit
 publish_to: 'none'
 
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_chatkit:
+  flutter_chat_kit_ui:
     path: ../
 
 dev_dependencies:

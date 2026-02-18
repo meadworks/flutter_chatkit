@@ -1,5 +1,5 @@
-import 'package:flutter_chatkit/src/models/page.dart';
-import 'package:flutter_chatkit/src/models/thread_item.dart';
+import 'package:flutter_chat_kit_ui/src/models/page.dart';
+import 'package:flutter_chat_kit_ui/src/models/thread_item.dart';
 
 /// Thread status sealed class hierarchy.
 ///

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chatkit/flutter_chatkit.dart';
+import 'package:flutter_chat_kit_ui/flutter_chat_kit_ui.dart';
 
 /// Example using the OpenAI-hosted ChatKit backend
 class HostedExample extends StatefulWidget {

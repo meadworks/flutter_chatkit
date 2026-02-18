@@ -1,4 +1,4 @@
-# flutter_chatkit
+# flutter_chat_kit_ui
 
 A drop-in chat UI widget for Flutter that communicates with [OpenAI ChatKit](https://platform.openai.com/docs/guides/chatkit) backends or any self-hosted server implementing the same HTTP/SSE protocol.
 
@@ -28,17 +28,17 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_chatkit:
-    path: ../flutter_chatkit  # local path
+  flutter_chat_kit_ui:
+    path: ../flutter_chat_kit_ui  # local path
 ```
 
 Or from a git repository:
 
 ```yaml
 dependencies:
-  flutter_chatkit:
+  flutter_chat_kit_ui:
     git:
-      url: https://github.com/your-org/flutter_chatkit.git
+      url: https://github.com/your-org/flutter_chat_kit_ui.git
       ref: main
 ```
 
@@ -48,7 +48,7 @@ dependencies:
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_chatkit/flutter_chatkit.dart';
+import 'package:flutter_chat_kit_ui/flutter_chat_kit_ui.dart';
 
 class MyChatScreen extends StatefulWidget {
   const MyChatScreen({super.key});
@@ -170,7 +170,7 @@ ChatKitOptions(
 
 ## Theming
 
-`flutter_chatkit` has its own theme system that works alongside Flutter's `ThemeData`. If no `ChatKitTheme` is provided, it derives sensible defaults from the current Flutter theme.
+`flutter_chat_kit_ui` has its own theme system that works alongside Flutter's `ThemeData`. If no `ChatKitTheme` is provided, it derives sensible defaults from the current Flutter theme.
 
 ```dart
 // Use built-in light/dark themes
@@ -239,7 +239,7 @@ controller.dispose();
 ## Architecture
 
 ```
-flutter_chatkit/
+flutter_chat_kit_ui/
   lib/src/
     models/          Data models (Thread, ThreadItem, Attachment, Annotation, ...)
     events/          SSE event types (ThreadStreamEvent, ThreadItemUpdate)

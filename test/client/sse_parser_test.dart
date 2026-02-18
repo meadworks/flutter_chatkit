@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_chatkit/flutter_chatkit.dart';
+import 'package:flutter_chat_kit_ui/flutter_chat_kit_ui.dart';
 
 void main() {
   group('SseParser', () {
