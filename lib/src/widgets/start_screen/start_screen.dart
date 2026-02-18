@@ -35,7 +35,7 @@ class StartScreen extends StatelessWidget {
                 Wrap(
                   spacing: theme.density.spacingMedium,
                   runSpacing: theme.density.spacingMedium,
-                  alignment: WrapAlignment.center,
+                  alignment: WrapAlignment.start,
                   children: options.suggestedPrompts.map((prompt) {
                     return PromptChip(
                       label: prompt.label,
