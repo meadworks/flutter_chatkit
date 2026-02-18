@@ -27,7 +27,7 @@ class AssistantMessageWidget extends StatelessWidget {
             data: item.fullText,
             selectable: true,
             styleSheet: MarkdownStyleSheet(
-              p: theme.typography.bodyLarge.copyWith(
+              p: theme.typography.bodyMedium.copyWith(
                 color: theme.colorScheme.onAssistantBubble,
               ),
               code: theme.typography.code.copyWith(
@@ -47,7 +47,7 @@ class AssistantMessageWidget extends StatelessWidget {
               h3: theme.typography.headingSmall.copyWith(
                 color: theme.colorScheme.onAssistantBubble,
               ),
-              listBullet: theme.typography.bodyLarge.copyWith(
+              listBullet: theme.typography.bodyMedium.copyWith(
                 color: theme.colorScheme.onAssistantBubble,
               ),
               tableColumnWidth: const IntrinsicColumnWidth(),
