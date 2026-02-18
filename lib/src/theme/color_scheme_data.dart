@@ -46,6 +46,52 @@ class ChatKitColorScheme {
   final Color composerBackground;
   final Color composerBorder;
 
+  ChatKitColorScheme copyWith({
+    Color? background,
+    Color? surface,
+    Color? surfaceVariant,
+    Color? onSurface,
+    Color? onSurfaceVariant,
+    Color? primary,
+    Color? onPrimary,
+    Color? secondary,
+    Color? onSecondary,
+    Color? error,
+    Color? onError,
+    Color? outline,
+    Color? outlineVariant,
+    Color? shadow,
+    Color? userBubble,
+    Color? onUserBubble,
+    Color? assistantBubble,
+    Color? onAssistantBubble,
+    Color? composerBackground,
+    Color? composerBorder,
+  }) {
+    return ChatKitColorScheme(
+      background: background ?? this.background,
+      surface: surface ?? this.surface,
+      surfaceVariant: surfaceVariant ?? this.surfaceVariant,
+      onSurface: onSurface ?? this.onSurface,
+      onSurfaceVariant: onSurfaceVariant ?? this.onSurfaceVariant,
+      primary: primary ?? this.primary,
+      onPrimary: onPrimary ?? this.onPrimary,
+      secondary: secondary ?? this.secondary,
+      onSecondary: onSecondary ?? this.onSecondary,
+      error: error ?? this.error,
+      onError: onError ?? this.onError,
+      outline: outline ?? this.outline,
+      outlineVariant: outlineVariant ?? this.outlineVariant,
+      shadow: shadow ?? this.shadow,
+      userBubble: userBubble ?? this.userBubble,
+      onUserBubble: onUserBubble ?? this.onUserBubble,
+      assistantBubble: assistantBubble ?? this.assistantBubble,
+      onAssistantBubble: onAssistantBubble ?? this.onAssistantBubble,
+      composerBackground: composerBackground ?? this.composerBackground,
+      composerBorder: composerBorder ?? this.composerBorder,
+    );
+  }
+
   static const light = ChatKitColorScheme(
     background: Color(0xFFFFFFFF),
     surface: Color(0xFFFFFFFF),
