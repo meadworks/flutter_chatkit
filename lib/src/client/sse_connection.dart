@@ -46,7 +46,7 @@ class SseClient {
 
     final response = await _httpClient.send(request);
 
-    if (response.statusCode != 200) {
+    if (response.statusCode < 200 || response.statusCode >= 300) {
       final responseBody = await response.stream.bytesToString();
       throw SseConnectionException(
         statusCode: response.statusCode,
