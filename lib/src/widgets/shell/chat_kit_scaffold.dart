@@ -45,12 +45,13 @@ class _ChatKitScaffoldState extends State<ChatKitScaffold> {
           Expanded(
             child: Column(
               children: [
-                ChatKitHeaderBar(
-                  onHistoryToggle: controller.options.history.enabled
-                      ? _toggleHistory
-                      : null,
-                  isHistoryOpen: _historyOpen,
-                ),
+                if (controller.options.header.show)
+                  ChatKitHeaderBar(
+                    onHistoryToggle: controller.options.history.enabled
+                        ? _toggleHistory
+                        : null,
+                    isHistoryOpen: _historyOpen,
+                  ),
                 Expanded(
                   child: hasActiveThread || controller.items.isNotEmpty
                       ? const MessageList()

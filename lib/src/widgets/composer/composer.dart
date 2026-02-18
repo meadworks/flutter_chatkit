@@ -31,7 +31,7 @@ class Composer extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(theme.density.composerPadding),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Expanded(child: ComposerTextField()),
                   SizedBox(width: theme.density.spacingMedium),

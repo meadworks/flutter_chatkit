@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'sse_parser.dart';
 
@@ -41,7 +42,7 @@ class SseClient {
     request.headers['Cache-Control'] = 'no-cache';
 
     // Write body and close
-    request.sink.add(body.codeUnits);
+    request.sink.add(utf8.encode(body));
     request.sink.close();
 
     final response = await _httpClient.send(request);
