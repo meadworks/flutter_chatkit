@@ -53,6 +53,22 @@ mixin StreamProcessingMixin {
         onThreadUpdatedFromStream(thread);
 
       case ThreadItemAddedEvent(:final item):
+        // If the server echoes back a user message, replace the optimistic one
+        if (item is UserMessageItem) {
+          final hasOptimistic = currentItems.any(
+            (i) => i is UserMessageItem && i.id.startsWith('pending-'),
+          );
+          if (hasOptimistic) {
+            currentItems = [
+              ...currentItems.where(
+                (i) => !(i is UserMessageItem && i.id.startsWith('pending-')),
+              ),
+              item,
+            ];
+            onItemsChanged();
+            break;
+          }
+        }
         currentItems = [...currentItems, item];
         onItemsChanged();
 

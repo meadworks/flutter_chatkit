@@ -141,6 +141,20 @@ class ChatKitController extends ChangeNotifier with StreamProcessingMixin {
 
     _clearStreamState();
 
+    // Add user message to items immediately so it's visible in the UI
+    final input = _messageController.buildInput();
+    final optimisticMessage = UserMessageItem(
+      id: 'pending-${DateTime.now().millisecondsSinceEpoch}',
+      threadId: _threadController.activeThreadId ?? '',
+      createdAt: DateTime.now(),
+      content: input.content,
+      attachments: input.attachments,
+      quotedText: input.quotedText,
+      inferenceOptions: input.inferenceOptions,
+    );
+    currentItems = [...currentItems, optimisticMessage];
+    notifyListeners();
+
     try {
       StreamResult result;
       if (_threadController.activeThreadId != null) {
@@ -155,6 +169,10 @@ class ChatKitController extends ChangeNotifier with StreamProcessingMixin {
       notifyListeners();
       await processStream(result);
     } catch (e) {
+      // Remove optimistic message on error
+      currentItems = currentItems.where(
+        (i) => !(i is UserMessageItem && i.id.startsWith('pending-')),
+      ).toList();
       _isStreaming = false;
       _errorMessage = e.toString();
       notifyListeners();
