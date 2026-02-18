@@ -1,6 +1,8 @@
 # flutter_chat_kit_ui
 
-A drop-in chat UI widget for Flutter that communicates with [OpenAI ChatKit](https://platform.openai.com/docs/guides/chatkit) backends or any self-hosted server implementing the same HTTP/SSE protocol.
+An unofficial Flutter port of the [OpenAI ChatKit UI](https://platform.openai.com/docs/guides/chatkit). A drop-in chat widget that communicates with OpenAI ChatKit backends or any self-hosted server implementing the same HTTP/SSE protocol.
+
+> **Note:** This package is not affiliated with or endorsed by OpenAI.
 
 ## Features
 
