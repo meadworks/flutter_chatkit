@@ -50,6 +50,7 @@ class AssistantMessageWidget extends StatelessWidget {
               listBullet: theme.typography.bodyLarge.copyWith(
                 color: theme.colorScheme.onAssistantBubble,
               ),
+              tableColumnWidth: const IntrinsicColumnWidth(),
             ),
           ),
           if (annotations.isNotEmpty) ...[
