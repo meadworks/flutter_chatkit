@@ -8,7 +8,7 @@ sealed class ThreadItemUpdate {
   factory ThreadItemUpdate.fromJson(Map<String, dynamic> json) {
     return switch (json['type']) {
       'assistant_message.content_part.added' => AssistantMessageContentPartAdded.fromJson(json),
-      'assistant_message.content_part.text.delta' => TextDelta.fromJson(json),
+      'assistant_message.content_part.text.delta' || 'assistant_message.content_part.text_delta' => TextDelta.fromJson(json),
       'assistant_message.content_part.annotation.added' => AnnotationAdded.fromJson(json),
       'assistant_message.content_part.done' => ContentPartDone.fromJson(json),
       'widget.delta' => WidgetDelta.fromJson(json),
@@ -29,8 +29,10 @@ class AssistantMessageContentPartAdded extends ThreadItemUpdate {
   final AssistantMessageContent part;
   factory AssistantMessageContentPartAdded.fromJson(Map<String, dynamic> json) {
     return AssistantMessageContentPartAdded(
-      partIndex: json['part_index'] as int,
-      part: AssistantMessageContent.fromJson(json['part'] as Map<String, dynamic>),
+      partIndex: (json['content_index'] ?? json['part_index']) as int? ?? 0,
+      part: AssistantMessageContent.fromJson(
+        (json['content'] ?? json['part']) as Map<String, dynamic>,
+      ),
     );
   }
 }
@@ -41,7 +43,7 @@ class TextDelta extends ThreadItemUpdate {
   final String delta;
   factory TextDelta.fromJson(Map<String, dynamic> json) {
     return TextDelta(
-      partIndex: json['part_index'] as int,
+      partIndex: (json['content_index'] ?? json['part_index']) as int? ?? 0,
       delta: json['delta'] as String,
     );
   }
@@ -53,7 +55,7 @@ class AnnotationAdded extends ThreadItemUpdate {
   final Annotation annotation;
   factory AnnotationAdded.fromJson(Map<String, dynamic> json) {
     return AnnotationAdded(
-      partIndex: json['part_index'] as int,
+      partIndex: (json['content_index'] ?? json['part_index']) as int? ?? 0,
       annotation: Annotation.fromJson(json['annotation'] as Map<String, dynamic>),
     );
   }
@@ -65,8 +67,10 @@ class ContentPartDone extends ThreadItemUpdate {
   final AssistantMessageContent part;
   factory ContentPartDone.fromJson(Map<String, dynamic> json) {
     return ContentPartDone(
-      partIndex: json['part_index'] as int,
-      part: AssistantMessageContent.fromJson(json['part'] as Map<String, dynamic>),
+      partIndex: (json['content_index'] ?? json['part_index']) as int? ?? 0,
+      part: AssistantMessageContent.fromJson(
+        (json['content'] ?? json['part']) as Map<String, dynamic>,
+      ),
     );
   }
 }
@@ -85,7 +89,7 @@ class WorkflowTaskAdded extends ThreadItemUpdate {
   final Map<String, dynamic> task;
   factory WorkflowTaskAdded.fromJson(Map<String, dynamic> json) {
     return WorkflowTaskAdded(
-      taskIndex: json['task_index'] as int,
+      taskIndex: (json['task_index'] as int?) ?? 0,
       task: json['task'] as Map<String, dynamic>,
     );
   }
@@ -97,7 +101,7 @@ class WorkflowTaskUpdated extends ThreadItemUpdate {
   final Map<String, dynamic> task;
   factory WorkflowTaskUpdated.fromJson(Map<String, dynamic> json) {
     return WorkflowTaskUpdated(
-      taskIndex: json['task_index'] as int,
+      taskIndex: (json['task_index'] as int?) ?? 0,
       task: json['task'] as Map<String, dynamic>,
     );
   }
@@ -109,7 +113,7 @@ class WorkflowTaskDone extends ThreadItemUpdate {
   final Map<String, dynamic> task;
   factory WorkflowTaskDone.fromJson(Map<String, dynamic> json) {
     return WorkflowTaskDone(
-      taskIndex: json['task_index'] as int,
+      taskIndex: (json['task_index'] as int?) ?? 0,
       task: json['task'] as Map<String, dynamic>,
     );
   }
