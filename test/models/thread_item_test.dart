@@ -1491,8 +1491,8 @@ void main() {
 
   group('UserMessageInput', () {
     test('toJson minimal', () {
-      final input = UserMessageInput(
-        content: [const UserMessageTextContent(text: 'Hi')],
+      const input = UserMessageInput(
+        content: [UserMessageTextContent(text: 'Hi')],
       );
 
       final json = input.toJson();
@@ -1503,17 +1503,17 @@ void main() {
     });
 
     test('toJson with all fields', () {
-      final input = UserMessageInput(
-        content: [const UserMessageTextContent(text: 'Hi')],
+      const input = UserMessageInput(
+        content: [UserMessageTextContent(text: 'Hi')],
         attachments: [
-          const FileAttachment(
+          FileAttachment(
             id: 'a1',
             name: 'file.txt',
             mimeType: 'text/plain',
           ),
         ],
         quotedText: 'Previous message',
-        inferenceOptions: const InferenceOptions(model: 'gpt-4'),
+        inferenceOptions: InferenceOptions(model: 'gpt-4'),
       );
 
       final json = input.toJson();

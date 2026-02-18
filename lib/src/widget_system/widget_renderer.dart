@@ -55,7 +55,7 @@ class WidgetRenderer extends StatelessWidget {
                 ...children.map((node) => WidgetNodeRenderer(
                   node: node,
                   onAction: onAction,
-                )),
+                ),),
                 if (footer != null) ...[
                   SizedBox(height: theme.density.spacingLarge),
                   ChatKitDivider(color: theme.colorScheme.outline),
@@ -63,7 +63,7 @@ class WidgetRenderer extends StatelessWidget {
                   ...footer.map((node) => WidgetNodeRenderer(
                     node: node,
                     onAction: onAction,
-                  )),
+                  ),),
                 ],
               ],
             ),
@@ -76,7 +76,7 @@ class WidgetRenderer extends StatelessWidget {
           children: children.map((node) => Padding(
             padding: EdgeInsets.only(bottom: theme.density.spacingSmall),
             child: WidgetNodeRenderer(node: node, onAction: onAction),
-          )).toList(),
+          ),).toList(),
         ),
 
       BasicRoot(:final children) => Column(
@@ -85,7 +85,7 @@ class WidgetRenderer extends StatelessWidget {
           children: children.map((node) => WidgetNodeRenderer(
             node: node,
             onAction: onAction,
-          )).toList(),
+          ),).toList(),
         ),
     };
   }

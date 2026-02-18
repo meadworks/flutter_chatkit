@@ -5,7 +5,7 @@ import 'package:flutter_chatkit/flutter_chatkit.dart';
 void main() {
   group('SseParser', () {
     test('parses a single SSE event', () async {
-      final input = 'data: {"type": "test", "value": 1}\n\n';
+      const input = 'data: {"type": "test", "value": 1}\n\n';
 
       final stream = Stream.value(utf8.encode(input));
       final events = await SseParser.parse(stream).toList();
@@ -16,7 +16,7 @@ void main() {
     });
 
     test('parses multiple SSE events', () async {
-      final input = 'data: {"type": "test", "value": 1}\n\n'
+      const input = 'data: {"type": "test", "value": 1}\n\n'
           'data: {"type": "test", "value": 2}\n\n';
 
       final stream = Stream.value(utf8.encode(input));
@@ -28,7 +28,7 @@ void main() {
     });
 
     test('handles [DONE] termination', () async {
-      final input = 'data: {"type": "test"}\n\n'
+      const input = 'data: {"type": "test"}\n\n'
           'data: [DONE]\n\n';
 
       final stream = Stream.value(utf8.encode(input));
@@ -38,7 +38,7 @@ void main() {
     });
 
     test('handles multi-line data fields by joining with newlines', () async {
-      final input = 'data: {"type":\n'
+      const input = 'data: {"type":\n'
           'data: "test"}\n\n';
 
       final stream = Stream.value(utf8.encode(input));
@@ -49,7 +49,7 @@ void main() {
     });
 
     test('ignores comment lines starting with colon', () async {
-      final input = ': this is a comment\n'
+      const input = ': this is a comment\n'
           'data: {"type": "test"}\n\n';
 
       final stream = Stream.value(utf8.encode(input));
@@ -59,7 +59,7 @@ void main() {
     });
 
     test('ignores event: lines', () async {
-      final input = 'event: message\n'
+      const input = 'event: message\n'
           'data: {"type": "test"}\n\n';
 
       final stream = Stream.value(utf8.encode(input));
@@ -70,7 +70,7 @@ void main() {
     });
 
     test('ignores id: lines', () async {
-      final input = 'id: 123\n'
+      const input = 'id: 123\n'
           'data: {"type": "test"}\n\n';
 
       final stream = Stream.value(utf8.encode(input));
@@ -80,7 +80,7 @@ void main() {
     });
 
     test('ignores retry: lines', () async {
-      final input = 'retry: 3000\n'
+      const input = 'retry: 3000\n'
           'data: {"type": "test"}\n\n';
 
       final stream = Stream.value(utf8.encode(input));
@@ -90,7 +90,7 @@ void main() {
     });
 
     test(r'handles \r\n line endings', () async {
-      final input = 'data: {"type": "test"}\r\n\r\n';
+      const input = 'data: {"type": "test"}\r\n\r\n';
 
       final stream = Stream.value(utf8.encode(input));
       final events = await SseParser.parse(stream).toList();
@@ -100,7 +100,7 @@ void main() {
     });
 
     test(r'handles \r line endings', () async {
-      final input = 'data: {"type": "test"}\r\r';
+      const input = 'data: {"type": "test"}\r\r';
 
       final stream = Stream.value(utf8.encode(input));
       final events = await SseParser.parse(stream).toList();
@@ -134,7 +134,7 @@ void main() {
     });
 
     test('handles many small chunks', () async {
-      final fullInput = 'data: {"type": "test"}\n\n';
+      const fullInput = 'data: {"type": "test"}\n\n';
       final chunks = fullInput.split('').map((c) => utf8.encode(c));
 
       final stream = Stream.fromIterable(chunks);
@@ -145,7 +145,7 @@ void main() {
     });
 
     test('skips malformed JSON and continues', () async {
-      final input = 'data: not json at all\n\n'
+      const input = 'data: not json at all\n\n'
           'data: {"type": "valid"}\n\n';
 
       final stream = Stream.value(utf8.encode(input));
@@ -156,7 +156,7 @@ void main() {
     });
 
     test('skips incomplete JSON and continues', () async {
-      final input = 'data: {"type": "incomplete\n\n'
+      const input = 'data: {"type": "incomplete\n\n'
           'data: {"type": "complete"}\n\n';
 
       final stream = Stream.value(utf8.encode(input));
@@ -167,7 +167,7 @@ void main() {
     });
 
     test('handles empty data between events', () async {
-      final input = 'data: {"a": 1}\n\n'
+      const input = 'data: {"a": 1}\n\n'
           '\n'
           'data: {"b": 2}\n\n';
 
@@ -178,14 +178,14 @@ void main() {
     });
 
     test('empty stream produces no events', () async {
-      final stream = Stream<List<int>>.empty();
+      const stream = Stream<List<int>>.empty();
       final events = await SseParser.parse(stream).toList();
 
       expect(events, isEmpty);
     });
 
     test('stream with only comments produces no events', () async {
-      final input = ': comment 1\n: comment 2\n\n';
+      const input = ': comment 1\n: comment 2\n\n';
 
       final stream = Stream.value(utf8.encode(input));
       final events = await SseParser.parse(stream).toList();
@@ -195,7 +195,7 @@ void main() {
 
     test('flushes pending data on stream close', () async {
       // Data without a trailing double newline - should be flushed on close
-      final input = 'data: {"type": "flushed"}';
+      const input = 'data: {"type": "flushed"}';
 
       final stream = Stream.value(utf8.encode(input));
       final events = await SseParser.parse(stream).toList();
@@ -205,7 +205,7 @@ void main() {
     });
 
     test('[DONE] after data does not produce extra events', () async {
-      final input = 'data: {"seq": 1}\n\n'
+      const input = 'data: {"seq": 1}\n\n'
           'data: {"seq": 2}\n\n'
           'data: [DONE]\n\n';
 
@@ -236,7 +236,7 @@ void main() {
     });
 
     test('handles JSON with unicode characters', () async {
-      final input = 'data: {"emoji": "\\u2764", "text": "hello"}\n\n';
+      const input = 'data: {"emoji": "\\u2764", "text": "hello"}\n\n';
 
       final stream = Stream.value(utf8.encode(input));
       final events = await SseParser.parse(stream).toList();

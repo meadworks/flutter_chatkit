@@ -137,6 +137,6 @@ class UserMessageItem extends ThreadItem {
       .map((c) => switch (c) {
             UserMessageTextContent(:final text) => text,
             UserMessageTagContent(:final text) => text,
-          })
+          },)
       .join('');
 }

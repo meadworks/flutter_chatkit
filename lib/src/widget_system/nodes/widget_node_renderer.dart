@@ -99,7 +99,7 @@ class WidgetNodeRenderer extends StatelessWidget {
           children: children.map((c) => Padding(
             padding: EdgeInsets.only(bottom: theme.density.spacingMedium),
             child: WidgetNodeRenderer(node: c, onAction: onAction),
-          )).toList(),
+          ),).toList(),
         ),
 
       LinkNode(:final text) => ChatKitTappable(
@@ -134,7 +134,7 @@ class WidgetNodeRenderer extends StatelessWidget {
   }
 
   Widget _buildButton(BuildContext context, ChatKitThemeData theme,
-      String label, Map<String, dynamic>? action, String? variant, bool disabled) {
+      String label, Map<String, dynamic>? action, String? variant, bool disabled,) {
     final isPrimary = variant == 'primary' || variant == null;
     return ChatKitTappable(
       onTap: disabled ? null : () {
@@ -160,7 +160,7 @@ class WidgetNodeRenderer extends StatelessWidget {
   }
 
   Widget _buildInput(ChatKitThemeData theme, String? name, String? label,
-      String? placeholder, String? value) {
+      String? placeholder, String? value,) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -170,7 +170,7 @@ class WidgetNodeRenderer extends StatelessWidget {
             padding: EdgeInsets.only(bottom: theme.density.spacingSmall),
             child: Text(label, style: theme.typography.labelMedium.copyWith(
               color: theme.colorScheme.onSurface,
-            )),
+            ),),
           ),
         ChatKitTextField(
           controller: TextEditingController(text: value),
@@ -187,7 +187,7 @@ class WidgetNodeRenderer extends StatelessWidget {
   }
 
   Widget _buildTextArea(ChatKitThemeData theme, String? name, String? label,
-      String? placeholder, String? value, int? rows) {
+      String? placeholder, String? value, int? rows,) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -197,7 +197,7 @@ class WidgetNodeRenderer extends StatelessWidget {
             padding: EdgeInsets.only(bottom: theme.density.spacingSmall),
             child: Text(label, style: theme.typography.labelMedium.copyWith(
               color: theme.colorScheme.onSurface,
-            )),
+            ),),
           ),
         ChatKitTextField(
           controller: TextEditingController(text: value),
@@ -212,7 +212,7 @@ class WidgetNodeRenderer extends StatelessWidget {
   }
 
   Widget _buildSelect(ChatKitThemeData theme, String? name, String? label,
-      List<SelectOption> options, String? value) {
+      List<SelectOption> options, String? value,) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -222,14 +222,14 @@ class WidgetNodeRenderer extends StatelessWidget {
             padding: EdgeInsets.only(bottom: theme.density.spacingSmall),
             child: Text(label, style: theme.typography.labelMedium.copyWith(
               color: theme.colorScheme.onSurface,
-            )),
+            ),),
           ),
         ChatKitDropdown<String>(
           value: value,
           items: options.map((o) => ChatKitDropdownItem(
             value: o.value,
             label: o.label,
-          )).toList(),
+          ),).toList(),
           onChanged: (_) {},
           borderRadius: theme.radius.mediumBorderRadius,
           contentPadding: EdgeInsets.symmetric(
@@ -250,14 +250,14 @@ class WidgetNodeRenderer extends StatelessWidget {
           SizedBox(width: theme.density.spacingSmall),
           Text(label, style: theme.typography.bodyMedium.copyWith(
             color: theme.colorScheme.onSurface,
-          )),
+          ),),
         ],
       ],
     );
   }
 
   Widget _buildTable(ChatKitThemeData theme, List<TableColumn> columns,
-      List<Map<String, dynamic>> rows) {
+      List<Map<String, dynamic>> rows,) {
     return Table(
       border: TableBorder.all(color: theme.colorScheme.outline, width: 0.5),
       children: [
@@ -273,7 +273,7 @@ class WidgetNodeRenderer extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-          )).toList(),
+          ),).toList(),
         ),
         // Data rows
         ...rows.map((row) => TableRow(
@@ -285,8 +285,8 @@ class WidgetNodeRenderer extends StatelessWidget {
                 color: theme.colorScheme.onSurface,
               ),
             ),
-          )).toList(),
-        )),
+          ),).toList(),
+        ),),
       ],
     );
   }
@@ -298,7 +298,7 @@ class WidgetNodeRenderer extends StatelessWidget {
       if (i < children.length - 1) {
         widgets.add(axis == Axis.horizontal
             ? SizedBox(width: gap)
-            : SizedBox(height: gap));
+            : SizedBox(height: gap),);
       }
     }
     return widgets;

@@ -77,7 +77,7 @@ class FileAttachment extends Attachment {
       threadId: json['thread_id'] as String?,
       uploadDescriptor: json['upload_descriptor'] != null
           ? AttachmentUploadDescriptor.fromJson(
-              json['upload_descriptor'] as Map<String, dynamic>)
+              json['upload_descriptor'] as Map<String, dynamic>,)
           : null,
       metadata: json['metadata'] as Map<String, dynamic>?,
     );
@@ -131,7 +131,7 @@ class ImageAttachment extends Attachment {
       threadId: json['thread_id'] as String?,
       uploadDescriptor: json['upload_descriptor'] != null
           ? AttachmentUploadDescriptor.fromJson(
-              json['upload_descriptor'] as Map<String, dynamic>)
+              json['upload_descriptor'] as Map<String, dynamic>,)
           : null,
       metadata: json['metadata'] as Map<String, dynamic>?,
     );

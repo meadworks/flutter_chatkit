@@ -16,7 +16,7 @@ class _SelfHostedExampleState extends State<SelfHostedExample> {
   void initState() {
     super.initState();
     _controller = ChatKitController(
-      options: ChatKitOptions(
+      options: const ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost:8000/chatkit'),
         startScreen: StartScreenOption(
           greeting: 'Welcome to Flutter ChatKit!',

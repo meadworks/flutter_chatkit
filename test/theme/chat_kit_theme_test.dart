@@ -169,23 +169,23 @@ void main() {
       const radius = ChatKitRadius();
       expect(
         radius.smallBorderRadius,
-        BorderRadius.all(const Radius.circular(4)),
+        const BorderRadius.all(Radius.circular(4)),
       );
       expect(
         radius.mediumBorderRadius,
-        BorderRadius.all(const Radius.circular(8)),
+        const BorderRadius.all(Radius.circular(8)),
       );
       expect(
         radius.largeBorderRadius,
-        BorderRadius.all(const Radius.circular(12)),
+        const BorderRadius.all(Radius.circular(12)),
       );
       expect(
         radius.extraLargeBorderRadius,
-        BorderRadius.all(const Radius.circular(16)),
+        const BorderRadius.all(Radius.circular(16)),
       );
       expect(
         radius.fullBorderRadius,
-        BorderRadius.all(const Radius.circular(999)),
+        const BorderRadius.all(Radius.circular(999)),
       );
     });
   });

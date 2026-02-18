@@ -27,7 +27,7 @@ class _HostedExampleState extends State<HostedExample> {
             );
           },
         ),
-        startScreen: StartScreenOption(
+        startScreen: const StartScreenOption(
           greeting: 'How can I help you today?',
         ),
       ),

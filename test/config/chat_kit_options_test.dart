@@ -46,7 +46,7 @@ void main() {
 
   group('ChatKitOptions', () {
     test('creates with CustomApiConfig', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost:8000'),
       );
 
@@ -65,7 +65,7 @@ void main() {
     });
 
     test('has sensible defaults for header', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost'),
       );
 
@@ -76,7 +76,7 @@ void main() {
     });
 
     test('has sensible defaults for history', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost'),
       );
 
@@ -85,7 +85,7 @@ void main() {
     });
 
     test('has sensible defaults for composer', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost'),
       );
 
@@ -98,7 +98,7 @@ void main() {
     });
 
     test('has sensible defaults for disclaimer', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost'),
       );
 
@@ -107,7 +107,7 @@ void main() {
     });
 
     test('has sensible defaults for entities', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost'),
       );
 
@@ -116,7 +116,7 @@ void main() {
     });
 
     test('has sensible defaults for threadItemActions', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost'),
       );
 
@@ -126,7 +126,7 @@ void main() {
     });
 
     test('accepts custom header option', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost'),
         header: HeaderOption(
           title: 'My Chat',
@@ -143,7 +143,7 @@ void main() {
     });
 
     test('accepts custom history option', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost'),
         history: HistoryOption(enabled: false, pageSize: 50),
       );
@@ -153,7 +153,7 @@ void main() {
     });
 
     test('accepts custom disclaimer option', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost'),
         disclaimer: DisclaimerOption(
           enabled: true,
@@ -166,7 +166,7 @@ void main() {
     });
 
     test('accepts custom thread item actions', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost'),
         threadItemActions: ThreadItemActionsOption(
           showFeedback: false,
@@ -181,7 +181,7 @@ void main() {
     });
 
     test('accepts custom composer with file upload config', () {
-      final options = ChatKitOptions(
+      const options = ChatKitOptions(
         api: CustomApiConfig(url: 'http://localhost'),
         composer: ComposerOption(
           placeholder: 'Ask me anything...',
@@ -213,7 +213,7 @@ void main() {
     });
 
     test('holds greeting and prompts', () {
-      final option = StartScreenOption(
+      const option = StartScreenOption(
         greeting: 'Hello!',
         suggestedPrompts: [
           SuggestedPrompt(label: 'Test', prompt: 'test prompt'),
@@ -265,7 +265,7 @@ void main() {
     });
 
     test('with entities', () {
-      final option = EntitiesOption(
+      const option = EntitiesOption(
         enabled: true,
         entities: [
           Entity(id: 'e1', label: 'User 1'),

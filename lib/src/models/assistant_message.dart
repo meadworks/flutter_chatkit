@@ -62,7 +62,7 @@ class AssistantMessageItem extends ThreadItem {
       createdAt: DateTime.parse(json['created_at'] as String),
       content: (json['content'] as List)
           .map((c) =>
-              AssistantMessageContent.fromJson(c as Map<String, dynamic>))
+              AssistantMessageContent.fromJson(c as Map<String, dynamic>),)
           .toList(),
     );
   }

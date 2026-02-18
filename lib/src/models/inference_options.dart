@@ -18,7 +18,7 @@ class InferenceOptions {
     return InferenceOptions(
       toolChoice: json['tool_choice'] != null
           ? ToolChoice.fromJson(
-              json['tool_choice'] as Map<String, dynamic>)
+              json['tool_choice'] as Map<String, dynamic>,)
           : null,
       model: json['model'] as String?,
     );
