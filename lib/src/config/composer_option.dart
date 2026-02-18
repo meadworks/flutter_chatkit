@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 /// Configuration for file upload in the composer
 class FileUploadOption {
   const FileUploadOption({
@@ -18,10 +20,18 @@ class ComposerOption {
     this.fileUpload = const FileUploadOption(),
     this.showToolPicker = false,
     this.showModelPicker = false,
+    this.sendIcon,
+    this.cancelIcon,
   });
 
   final String? placeholder;
   final FileUploadOption fileUpload;
   final bool showToolPicker;
   final bool showModelPicker;
+
+  /// Custom icon data for the send button. Uses default arrow icon if null.
+  final IconData? sendIcon;
+
+  /// Custom icon data for the cancel/stop button. Uses default stop icon if null.
+  final IconData? cancelIcon;
 }

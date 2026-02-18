@@ -12,6 +12,7 @@ class SendButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = ChatKitInherited.of(context);
     final theme = ChatKitTheme.of(context);
+    final composerOptions = controller.options.composer;
 
     if (controller.isStreamActive) {
       return ChatKitIconButton(
@@ -25,7 +26,7 @@ class SendButton extends StatelessWidget {
             shape: BoxShape.circle,
           ),
           child: Icon(
-            ChatKitIcons.stop,
+            composerOptions.cancelIcon ?? ChatKitIcons.stop,
             color: theme.colorScheme.onError,
             size: 20,
           ),
@@ -40,17 +41,20 @@ class SendButton extends StatelessWidget {
         controller.send();
       } : null,
       tooltip: 'Send message',
-      icon: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          color: canSend ? theme.colorScheme.primary : theme.colorScheme.surfaceVariant,
-          shape: BoxShape.circle,
-        ),
-        child: Icon(
-          ChatKitIcons.arrowUpward,
-          color: canSend ? theme.colorScheme.onPrimary : theme.colorScheme.onSurfaceVariant,
-          size: 20,
+      icon: Opacity(
+        opacity: canSend ? 1.0 : 0.4,
+        child: Container(
+          width: 36,
+          height: 36,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.primary,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            composerOptions.sendIcon ?? ChatKitIcons.arrowUpward,
+            color: theme.colorScheme.onPrimary,
+            size: 20,
+          ),
         ),
       ),
     );
