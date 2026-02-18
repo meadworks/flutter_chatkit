@@ -155,9 +155,17 @@ class ChatKitController extends ChangeNotifier with StreamProcessingMixin {
       notifyListeners();
       await processStream(result);
     } catch (e) {
+      _isStreaming = false;
       _errorMessage = e.toString();
       notifyListeners();
     }
+  }
+
+  /// Dismiss the current error message
+  void dismissError() {
+    _errorMessage = null;
+    _allowRetry = false;
+    notifyListeners();
   }
 
   /// Cancel the current streaming response
@@ -227,6 +235,7 @@ class ChatKitController extends ChangeNotifier with StreamProcessingMixin {
 
   @override
   void onStreamError(String? code, String message, bool allowRetry) {
+    _isStreaming = false;
     _errorMessage = message;
     _allowRetry = allowRetry;
     _options.events.onError?.call(code, message, allowRetry);

@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../chat_kit_inherited.dart';
 import 'header_bar.dart';
 import 'history_panel.dart';
 import '../start_screen/start_screen.dart';
 import '../messages/message_list.dart';
+import '../messages/error_message_widget.dart';
 import '../composer/composer.dart';
 
 /// The main scaffold layout: header + body + composer
@@ -55,6 +56,14 @@ class _ChatKitScaffoldState extends State<ChatKitScaffold> {
                       ? const MessageList()
                       : const StartScreen(),
                 ),
+                if (controller.errorMessage != null)
+                  ErrorMessageWidget(
+                    message: controller.errorMessage!,
+                    allowRetry: controller.allowRetry,
+                    onRetry: controller.allowRetry
+                        ? () => controller.dismissError()
+                        : null,
+                  ),
                 const Composer(),
               ],
             ),

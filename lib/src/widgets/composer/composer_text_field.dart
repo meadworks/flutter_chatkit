@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import '../../theme/chat_kit_theme.dart';
 import '../chat_kit_inherited.dart';
+import '../primitives/chatkit_primitives.dart';
 
 /// The text input field in the composer
 class ComposerTextField extends StatefulWidget {
@@ -14,6 +15,7 @@ class ComposerTextField extends StatefulWidget {
 class _ComposerTextFieldState extends State<ComposerTextField> {
   late TextEditingController _textController;
   final FocusNode _focusNode = FocusNode();
+  final FocusNode _keyboardListenerFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -34,6 +36,7 @@ class _ComposerTextFieldState extends State<ComposerTextField> {
   void dispose() {
     _textController.dispose();
     _focusNode.dispose();
+    _keyboardListenerFocusNode.dispose();
     super.dispose();
   }
 
@@ -53,7 +56,7 @@ class _ComposerTextFieldState extends State<ComposerTextField> {
     final options = controller.options.composer;
 
     return KeyboardListener(
-      focusNode: FocusNode(),
+      focusNode: _keyboardListenerFocusNode,
       onKeyEvent: (event) {
         // Submit on Enter (without Shift)
         if (event is KeyDownEvent &&
@@ -62,39 +65,28 @@ class _ComposerTextFieldState extends State<ComposerTextField> {
           _onSubmit();
         }
       },
-      child: TextField(
+      child: ChatKitTextField(
         controller: _textController,
         focusNode: _focusNode,
         maxLines: 5,
         minLines: 1,
-        textInputAction: TextInputAction.newline,
         onChanged: (text) => controller.setComposerText(text),
         style: theme.typography.bodyLarge.copyWith(
           color: theme.colorScheme.onSurface,
         ),
-        decoration: InputDecoration(
-          hintText: options.placeholder ?? 'Type a message...',
-          hintStyle: theme.typography.bodyLarge.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
-          filled: true,
-          fillColor: theme.colorScheme.surfaceVariant,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(theme.radius.composer),
-            borderSide: BorderSide.none,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(theme.radius.composer),
-            borderSide: BorderSide(color: theme.colorScheme.composerBorder, width: 0.5),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(theme.radius.composer),
-            borderSide: BorderSide(color: theme.colorScheme.primary, width: 1.5),
-          ),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: theme.density.paddingExtraLarge,
-            vertical: theme.density.paddingLarge,
-          ),
+        hintText: options.placeholder ?? 'Type a message...',
+        hintStyle: theme.typography.bodyLarge.copyWith(
+          color: theme.colorScheme.onSurfaceVariant,
+        ),
+        fillColor: theme.colorScheme.surfaceVariant,
+        borderRadius: BorderRadius.all(theme.radius.composer),
+        borderColor: theme.colorScheme.composerBorder,
+        focusBorderColor: theme.colorScheme.primary,
+        borderWidth: 0.5,
+        focusBorderWidth: 1.5,
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: theme.density.paddingExtraLarge,
+          vertical: theme.density.paddingLarge,
         ),
       ),
     );
