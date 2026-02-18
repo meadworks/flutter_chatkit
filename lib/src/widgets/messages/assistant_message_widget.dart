@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import '../../models/thread_item.dart';
 import '../../theme/chat_kit_theme.dart';
-import 'message_bubble.dart';
 import 'annotation_widget.dart';
 
 /// Displays an assistant message with markdown rendering
@@ -16,8 +15,10 @@ class AssistantMessageWidget extends StatelessWidget {
     final theme = ChatKitTheme.of(context);
     final annotations = item.allAnnotations;
 
-    return MessageBubble(
-      isUser: false,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: theme.density.spacingSmall,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
