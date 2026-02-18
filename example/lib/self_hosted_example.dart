@@ -26,9 +26,12 @@ class _SelfHostedExampleState extends State<SelfHostedExample> {
             SuggestedPrompt(label: 'Explain quantum computing', prompt: 'Explain quantum computing in simple terms'),
           ],
         ),
-        header: HeaderOption(showTitle: true),
+        header: HeaderOption(show: true, showTitle: true),
         history: HistoryOption(enabled: true),
-        composer: ComposerOption(placeholder: 'Ask me anything...'),
+        composer: ComposerOption(
+          placeholder: 'Ask me anything...',
+          sendIcon: Icons.send,
+        ),
         disclaimer: DisclaimerOption(
           enabled: true,
           text: 'AI can make mistakes. Check important info.',

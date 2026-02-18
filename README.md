@@ -121,8 +121,9 @@ ChatKitOptions(
     ],
   ),
 
-  // Header bar
+  // Header bar (set show: false to hide entirely)
   header: HeaderOption(
+    show: true,
     title: 'My Assistant',
     showTitle: true,
     showHistoryButton: true,
@@ -135,6 +136,8 @@ ChatKitOptions(
   // Composer
   composer: ComposerOption(
     placeholder: 'Ask me anything...',
+    sendIcon: Icons.send,       // custom send button icon
+    cancelIcon: Icons.close,    // custom cancel button icon
     fileUpload: FileUploadOption(
       enabled: true,
       maxFileSize: 10 * 1024 * 1024,
